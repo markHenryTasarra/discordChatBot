@@ -2,6 +2,9 @@
 Discord Chat Bot!
 
 Done using the following Javascript Libraries:
-- Node
+- Node, lodash, nodemon
 
 Features:
+- A ping
+- Russian roulette function
+- Dice rolling function
