@@ -1,9 +1,9 @@
 //Dependancies
-const discord = require('discord.js');
+const Discord = require('discord.js');
 const fs = require('fs');
 
 //
-const package = require('package.json');
+const package = require('./package.json');
 const bot = new Discord.Client({
     disableEveryone: true
 });
@@ -36,4 +36,28 @@ bot.on("ready", async () => {
 
 bot.on("guildMemberAdd", member => {
     //On joining a server
+    const channel = member.guild.channels.fine(ch => ch.name == "general");//general channel
+    channel.send(`Hi ${member.displayName}!`);//Hello discord world!
 })
+
+bot.on("message", msg => {
+    //On a message
+    if (msg.author.bot) return;
+    //if (message.channel.type === "dm") return;
+    let prefix = "!"; //Sets the prefix declared in config.json or later "config.prefix"
+    let messageArray = msg.content.split(" "); //turns the message into an array of strings by splitting by space, and set to lowercase
+    let cmd = messageArray[0].toLowerCase(); //the command section of the message
+    let args = messageArray.slice(1); //the arguments after the command
+    let commandFile = bot.commands.get(cmd.slice(prefix.length)); //declaring folder holding all the JS commands
+
+    if (commandFile) {
+        if (cmd.startsWith(prefix)) {
+            commandFile.run(bot, msg, args);
+        }
+    }
+})
+
+//Error handling
+bot.on("error", console.error);
+
+bot.login(package.token);

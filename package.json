@@ -8,9 +8,11 @@
   },
   "author": "Mark-Henry Tasarra",
   "license": "ISC",
-  "token": "*****",
+  "token": "****",
   "dependencies": {
     "discord.js": "^11.4.2",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.11",
+    "nodemon": "^1.18.9"
   }
 }
